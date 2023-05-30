@@ -17,6 +17,7 @@ export async function GET(request: Request){
 		const requestData = await getData(filteredParams,key)
 		return NextResponse.json({requestData})	
 	}catch(e){
+		console.log(e)
 		return NextResponse.json({"error":e})	
 	}
 	

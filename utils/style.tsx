@@ -1,7 +1,6 @@
 import getColor from "./getColor"
 
 const style = (feature)=>{
-    console.log("executed")
     return {
         fillColor: getColor(feature.properties.population),
         weight: .5,

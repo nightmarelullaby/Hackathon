@@ -43,9 +43,8 @@ export const DataOfferStructure = ({data}) => {
 		<div className="mb-[48px]">
 			<header className="flex items-center">
 	
-		<Image alt={data.profile.name} src={data}/> 
 		   	<div className="flex flex gap-x-4">
-		   		<Image alt={data.profile?.name}
+		   		<Image alt={data.profile.name}
 		   		src={data.profile?.logoUrl? data.profile?.logoUrl:logoFallback} 
 		   		width="80" 
 		   		height="80" 
@@ -99,7 +98,7 @@ export const DataOfferStructure = ({data}) => {
 import getCoordinatesByCity from "@/services/getCoordinatesByCity"
 export default function ModalInfo(props){
 
-	const fetcher = (args):any => fetch(args).then(res => res.json())
+	const fetcher = (args):any => fetch(args,{mode:"no-cors"}).then(res => res.json())
 	const { data, error, isLoading } = useSWR(`/api/getDataByID?id=${props.id}`, fetcher)
 	const [zoom,setZoom] = useRecoilState(ZoomState)
 	const [modal,setModal] = useRecoilState(modalState)

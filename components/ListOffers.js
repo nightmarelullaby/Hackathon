@@ -37,7 +37,7 @@ export default function ListOffers(props){
       
       {props.data.map(e =>(
       // <div >
-      <Card className="shadow-[rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px] border-4 border-neutral-50 ">
+      <Card key={e.author.name}className="shadow-[rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px] border-4 border-neutral-50 ">
 
       <a href={e.author.uri} target="_BLANK">
           <div className="group/card relative flex justify-between items-start mb-2">

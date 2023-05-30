@@ -536,7 +536,9 @@ export default function FilteringCard(){
 
          setLoading(true)
          console.log(q,category,province)
-         const requestData = await fetch(`https://hackathon-infojobs-eq2qvzteb-nightmarelullaby.vercel.app/api/getData?category=${category}&q=${q}&province=${province}&facets=true`)  
+         const requestData = await fetch(`api/getData?category=${category}&q=${q}&province=${province}&facets=true`,{
+            mode:"no-cors"
+         })  
          const formatedData = await requestData.json() 
 
          const {facets} = await formatedData.requestData
