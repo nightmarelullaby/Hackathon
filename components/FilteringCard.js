@@ -549,7 +549,7 @@ export default function FilteringCard(){
             return {...feature,properties:{...feature.properties,population:provinceData?.count}}
          })
          let prevgeo = {...geoJSON}
-         prevgeo?.features = newFeatures
+         prevgeo.features = newFeatures
 
          setgeoJSON(prevgeo)
          setOffers(formatedData.requestData.offers)

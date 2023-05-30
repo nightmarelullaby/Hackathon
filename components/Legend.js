@@ -8,7 +8,7 @@ import style from "@/utils/style"
 export default function Legend (props){
 	const mapHook = useMap()
 	var legend = L.control({position:"bottomright"})
-	useEffect(():any => {
+	useEffect(() => {
 		legend.onAdd = function (map){
 		     var div = L.DomUtil.create('div', "legend"),
 		        grades = [0, 10, 20, 50, 100, 200, 500, 1000],

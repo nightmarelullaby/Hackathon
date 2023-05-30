@@ -1,12 +1,12 @@
 import Navbar,{NavbarElement} from "@/components/Navbar"
 import Image from "next/image"
-import {Title, Flex, Metric, Subtile, Bold, Italic, Text, TabList, Tab,ProgressBar } from "@tremor/react";
+import {Title, Flex, Metric, Subtitle, Bold, Italic, Text, TabList, Tab,ProgressBar } from "@tremor/react";
 import Button from "@/components/Button"
 export default function NavbarLayout({children}){
 	return(<div>
 		<Navbar>
 			<NavbarElement style={{flexGrow:1,flexBasis:0}}className="grow basis-0">
-					<Image width="100" height="100" src="https://media.infojobs.net/portales/ij/appgrade/svgs/ij-logo-default_primary.svg"/>
+					<Image alt="InfoJobs Logo" width="100" height="100" src="https://media.infojobs.net/portales/ij/appgrade/svgs/ij-logo-default_primary.svg"/>
 			</NavbarElement>
 
 			<NavbarElement>

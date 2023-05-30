@@ -25,6 +25,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "Layouts/ModalLayout.js", "components/AutoZoom.js", "components/ProvincesLayer.js", "components/ListOffers.js", "components/Legend.js", "components/FilteringCard.js"],
   "exclude": ["node_modules"]
 }
