@@ -85,7 +85,7 @@ export const DataOfferStructure = ({data}) => {
 				<Text className="mt-[6px]">{data.description}</Text>
 				<Title className="mt-[6px]">Requisitos</Title>
 				
-				{/*<Text>  {dangerouslySetInnerHTML={{__html: data.minRequirements}}}</Text>*/}
+				<Text> {data.minRequirements}</Text>
 			</div>
 
 			<div className=" fixed bottom-0 bg-white w-[30vw] px-4 py-4 flex items-center justify-center">

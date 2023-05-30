@@ -520,7 +520,7 @@ const provincesA = [
 "id": 53
 }
 ]
-export default function FilteringCard(){
+export default function FilteringSection(){
    const [geoJSON,setgeoJSON] = useRecoilState(geoJSONState)
    const [offers,setOffers] = useRecoilState(offersState)
    const [totalResultsInCategory,setTotalResultsInCategory] = useState()
@@ -533,9 +533,7 @@ export default function FilteringCard(){
 
    const searchDataAndSet = async (category,province,q) => {
       try{
-
          setLoading(true)
-         console.log(q,category,province)
          const requestData = await fetch(`api/getData?category=${category}&q=${q}&province=${province}&facets=true`,{
             mode:"no-cors"
          })  
@@ -568,7 +566,7 @@ export default function FilteringCard(){
       
    }
       
-	return(<div>
+	return(<div className="flex flex-col">
 		
       <Flex>
       <TextInput className="rounded-l-full " onChange={(e)=>setCurrentQuery(e.target.value)}  icon={BriefcaseIcon} placeholder="Desarrollador web, Contador, Gerente de ventas..."/> 
@@ -587,7 +585,7 @@ export default function FilteringCard(){
             {provincesA.map(e => (<SelectBoxItem  key={e.key}  value={e.key} text={`${e.value}`}></SelectBoxItem>))}
       </SelectBox>
       <Button 
-               className="rounded-l-none rounded-r-full"
+               className="bg-blue-500 rounded-l-none rounded-r-full"
                // style={{marginLeft:"8px"}} 
                loading={loading} 
                // disabled={!currentProvince.key & !currentCategory.key }
@@ -595,9 +593,11 @@ export default function FilteringCard(){
                   Buscar
             </Button>
   </Flex>
-
-  <Text className="mt-3 mb-2">Categorías</Text>
+<div style={{alignSelf:"end"}}>
+  <Text className="mt-3 mb-2 text-start">Categoría</Text>
   <SelectBox 
+
+  className="ml-auto"
   // icon={AdjustmentsVerticalIcon}
   onValueChange={(value) => {
   	const [filter] = categories.filter(e => e.key === value)
@@ -610,5 +610,6 @@ export default function FilteringCard(){
    <SelectBoxItem  value="" text="Ninguno"></SelectBoxItem>
   {categories.map(e => <SelectBoxItem key={e.key} value={e.key} text={`${e.value}`}></SelectBoxItem>)}
   </SelectBox>
+  </div>
 </div>
 )}

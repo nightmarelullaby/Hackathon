@@ -21,7 +21,7 @@ import {
   TabList, 
   Tab,
   ProgressBar } from "@tremor/react";
-import FilteringCard from "@/components/FilteringCard"
+import FilteringSection from "@/components/FilteringSection"
 import HeroImage from "public/HeroImage.png"
 import {Plus_Jakarta_Sans} from 'next/font/google'
 import Button from "@/components/Button"
@@ -84,13 +84,13 @@ export default function Home() {
   return (
           <main style={{position:"relative"}} className="mt-8 flex flex-col items-center gap-x-4" >
            <section style={{margin:"48px 130px 48px 130px"}} className="flex gap-x-6 items-center">
-              <h1 style={PlusJakartaSans.style} className="text-[#181B1E] text-6xl leading-13 font-black">Encuentra los mejores <mark style={{background:"none",fontFamily:"inherit"}} className="text-blue-600">empleos.</mark> Contrata a los candidatos ideales</h1>
+              <h1 style={PlusJakartaSans.style} className="text-blue-950 text-6xl leading-13 font-black">Encuentra los mejores <mark style={{background:"none",fontFamily:"inherit"}} className="text-blue-400">empleos.</mark> Contrata a los candidatos ideales</h1>
               <Image src={HeroImage} alt="Girl with laptop"width="350" height="350"/>
               <Image src={BgBlur} alt="Blur background" width="502" height="788" style={{position:"absolute",left:-80,top:-100,zIndex:-1}}/> 
             </section>
 
             <section  style={{margin:"48px 0 48px 0",padding:"0 130px"}} className="w-full py-8">
-              <FilteringCard />
+              <FilteringSection />
               <div className="mt-4">
                 <div className="flex gap-x-[4px]">
                   <Title>Búsqueda con geolocalización</Title>

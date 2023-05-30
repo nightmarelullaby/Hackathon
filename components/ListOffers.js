@@ -26,6 +26,8 @@ const logoFallback = "https://components.infojobs.com/statics/images/pic-company
 import {modalState} from "@/atoms/modalState"
 import {fetchDataState} from "@/atoms/fetchData"
 import ModalInfo from "@/components/ModalInfo"
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 export default function ListOffers(props){
    const [modal,setModal] = useRecoilState(modalState)
@@ -37,7 +39,7 @@ export default function ListOffers(props){
       
       {props.data.map(e =>(
       // <div >
-      <Card key={e.author.name}className="shadow-[rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px] border-4 border-neutral-50 ">
+      <Card key={e.author.name} className="shadow-[rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px] border-4 border-neutral-50 ">
 
       <a href={e.author.uri} target="_BLANK">
           <div className="group/card relative flex justify-between items-start mb-2">
@@ -64,7 +66,7 @@ export default function ListOffers(props){
                   <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                   </svg>
-               <Text className="whitespace-nowrap text-stone-600 font-semibold">
+               <Text className="whitespace-nowrap text-stone-500 font-semibold">
                   {e.province.value}
                </Text>  
             </div>
@@ -72,7 +74,7 @@ export default function ListOffers(props){
                <svg style={{width:16,height:16,display:"flex",alignItems:"center"}} className="stroke-stone-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.8" >
                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                </svg>
-               <Text className="whitespace-nowrap text-stone-600 font-semibold">{e.contractType.value}</Text>
+               <Text className="whitespace-nowrap text-stone-500 font-semibold">{e.contractType.value}</Text>
             </div>
          </div>
           <div className="mb-2 flex gap-x-[2px] items-center">
@@ -86,21 +88,12 @@ export default function ListOffers(props){
                
             </li>
             <li>
-               <Text className="whitespace-nowrap">{e.teleworking?.value}</Text>
+               <Text className="whitespace-nowrap mb-2">{e.teleworking?.value}</Text>
             </li>
          </ul>
         </div>
         <div className="flex gap-x-[4px]">
-         <Button 
-            style={{width:"100%"}} 
-            icon={<svg style={{width:16,height:16,display:"flex",alignItems:"center"}} className="stroke-stone-500"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.0">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-               </svg>}
-            onClick={()=>console.log("x")}>
-               Localizar
-         </Button>
-         <Button style={{width:"100%"}} onClick={()=>setModal(<ModalInfo id={e.id}/>)}>Aplicar</Button>
+         <Button style={{width:"100%",marginTop:"auto"}} onClick={()=>setModal(<ModalInfo id={e.id}/>)}>Aplicar</Button>
          </div>
        </Card>
        // </div>

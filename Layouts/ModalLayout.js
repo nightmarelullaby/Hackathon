@@ -14,8 +14,8 @@ export default function ModalLayout({children}){
 		<>
 			<div>
 				{children}
-				<div style={modal?openBg:closedBg} className="bg-neutral-600"></div>
-				<div style={modal?openModal:closedModal} className="bg-white">
+				<div style={modal|| modal.length<=0?openBg:closedBg} className="bg-neutral-600"></div>
+				<div style={modal|| modal.length<=0?openModal:closedModal} className="bg-white">
 				    <header style={{position:"fixed",}}className="top-0 w-full py-4 bg-white border-b-[1px] border-solid border-slate-100">
 					    <button style={{cursor:"pointer"}} onClick={()=> setModal(!modal)}>
 							<svg style={{width:32,height:32}} className="stroke-stone-500 transition hover:stroke-stone-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="0.7" >
