@@ -1,5 +1,7 @@
+"use client"
 import Navbar,{NavbarElement} from "@/components/Navbar"
 import Image from "next/image"
+
 import {Title, Flex, Metric, Subtitle, Bold, Italic, Text, TabList, Tab,ProgressBar } from "@tremor/react";
 import Button from "@/components/Button"
 export default function NavbarLayout({children}){

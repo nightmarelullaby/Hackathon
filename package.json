@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@heroicons/react": "^1.0.6",
+    "@react-leaflet/universal-leaflet": "^1.0.1",
     "@tremor/react": "^2.7.0",
     "@types/node": "20.2.1",
     "@types/react": "18.2.6",

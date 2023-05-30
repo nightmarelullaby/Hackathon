@@ -1,3 +1,5 @@
+"use client"
+
 import {modalState} from "@/atoms/modalState"
 import {useRecoilState} from "recoil"
 

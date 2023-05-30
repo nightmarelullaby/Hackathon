@@ -1,14 +1,10 @@
 "use client"
 import Image from 'next/image'
-import {MapContainer,TileLayer,Marker,Popup,ZoomControl,GeoJSON,FeatureGroup} from "react-leaflet"
 import {useState,useRef,useEffect} from "react"
 import 'leaflet/dist/leaflet.css';
-import L from "leaflet";
 import style from "@/utils/style"
-import ProvincesLayer from "@/components/ProvincesLayer"
 import "./Legend.css"
 import {RecoilRoot} from "recoil"
-
 import { 
   BarList, 
   BarChart,
@@ -31,13 +27,17 @@ import {Plus_Jakarta_Sans} from 'next/font/google'
 import Button from "@/components/Button"
 import BgBlur from "public/BgBlur.png"
 import ListOffers from "@/components/ListOffers"
-import CustomMarker from "@/components/CustomMarker"
+
 const PlusJakartaSans = Plus_Jakarta_Sans({subsets: ['latin'], weight: ['400','200','300','500','600'],})
 import {geoJSONState} from "@/atoms/geoJSON"
 import {useRecoilState} from "recoil"
 import {offersState} from "@/atoms/offersState"
-import Legend from "../components/Legend"
-
+// import MapComponent from "@/components/MapComponent"
+import dynamic from 'next/dynamic';
+ 
+const MapComponent = dynamic(() => import("@/components/MapComponent"), {
+  ssr: false,
+});
 const companies = [
   {
     name:"Coca Cola Europacif Partners",
@@ -71,9 +71,8 @@ const companies = [
     offers:21,
     href:"https://grupo-ohl.ofertas-trabajo.infojobs.net/"
 },]
-import {Suspense} from "react"
-import AutoZoom from "@/components/AutoZoom"
 
+import {Suspense} from "react"
 
 export default function Home() {
   const [offers,setOffers] = useRecoilState(offersState)
@@ -100,35 +99,16 @@ export default function Home() {
                 <Text>Busca empleos y localizalos en el mapa.</Text>
               </div>
               <div className="mt-4 gap-x-4" style={{display:"grid",gridTemplateColumns:"1fr 1fr"}}>
-                <MapContainer 
-                  zoomControl={false}
-                  style={{borderRadius:6,overflow:"hidden",minWidth:"100%",height:600}} 
-                  center={[40.2085, -3.713]} 
-                  zoom={4.8} 
-                  scrollWheelZoom={true}>
-                  <AutoZoom /> 
-                  <CustomMarker/>
-                <TileLayer
-                  url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
-                />
-
-   
-                <ZoomControl 
-                  zoomInText={`<div style="display:flex;align-items:center;justify-content:center;height:100%;"><svg style="width:16px;height:16px;"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" /></svg></div>`} 
-                  zoomOutText={`<div style="display:flex;align-items:center;justify-content:center;height:100%;"><svg style="width:16px;height:16px;"xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="gray" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12h-15" /></svg></div>`}/>
-           
-
-                <Legend />
-                <ProvincesLayer /> 
-                </MapContainer>
+             <MapComponent/>
                 <Suspense fallback={<p>Loading...</p>}>
                   <ListOffers className="grow h-[600px] overflow-scroll p-[4px]" data={offers}/> 
                 </Suspense>
               </div>
+            </section>
+            <Divider style={{margin:"48px 130px 0 130px"}} className="h-px"/>
 
-          </section>
-          <Divider style={{margin:"48px 130px 0 130px"}} className="h-px"/>
-        <section style={{margin:"48px 130px 0 130px"}} >
+
+            <section style={{margin:"48px 130px 0 130px"}} >
             <Metric className="text-center">Trabaja con empresas líder en el mercado</Metric>
             <Subtitle className="text-center">Revisa los perfiles de las empresas top de España</Subtitle>
             <div className="flex gap-x-4 mt-6">
@@ -136,7 +116,7 @@ export default function Home() {
                 (<Card className=" group/card cursor-pointer hover:shadow overflow-hidden px-6">
                   <a target="_BLANK">
                   <div className="flex flex-col gap-x-6 items-start relative">
-                    <Image alt={company.name}width="45" height="45" style={{borderRadius:4,overflow:"hidden"}} quality={100} src={company.logo}/>
+                    <Image alt={company.name} width="45" height="45" style={{borderRadius:4,overflow:"hidden"}} quality={100} src={company.logo}/>
                     <div>
                       <Title className="whitespace-nowrap">{company.name.length > 20 ? company.name.slice(0,18) + " ...":company.name}</Title>  
                       <Text>{company.location}</Text>
