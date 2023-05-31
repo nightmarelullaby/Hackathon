@@ -16,7 +16,7 @@ import {
    Tab,
    ProgressBar,
    TextInput  } from "@tremor/react";
-   import { SearchIcon,BriefcaseIcon,GlobeAltIcon } from "@heroicons/react/solid";
+import { SearchIcon,BriefcaseIcon,GlobeAltIcon } from "@heroicons/react/solid";
 //SelectBox
 import { SelectBox, SelectBoxItem } from "@tremor/react";
 //MultiSelectBox
@@ -25,6 +25,7 @@ import {useEffect,useState} from "react"
 import {geoJSONState} from "@/atoms/geoJSON"
 import {offersState} from "@/atoms/offersState"
 import {fetchDataState} from "@/atoms/fetchData"
+import {PopupState} from "@/atoms/PopupState"
 import {useRecoilState} from "recoil"
 const categories = [
    {
@@ -521,6 +522,7 @@ const provincesA = [
 }
 ]
 export default function FilteringSection(){
+   const [popupState,setPopupState] = useRecoilState(PopupState) 
    const [geoJSON,setgeoJSON] = useRecoilState(geoJSONState)
    const [offers,setOffers] = useRecoilState(offersState)
    const [totalResultsInCategory,setTotalResultsInCategory] = useState()
@@ -534,6 +536,7 @@ export default function FilteringSection(){
    const searchDataAndSet = async (category,province,q) => {
       try{
          setLoading(true)
+         setPopupState({isVisible:true,state:"loading",title:"Recalculando el mapa",description:"Aguarda un momento..."})
          const requestData = await fetch(`api/getData?category=${category}&q=${q}&province=${province}&facets=true`,{
             mode:"no-cors"
          })  
@@ -553,12 +556,13 @@ export default function FilteringSection(){
 
          setgeoJSON(prevgeo)
          setOffers(formatedData.requestData.offers)
+         setPopupState({isVisible:true,state:"success",title:"Todo salió bien",description:"Los resultados se renderizaron correctamente"})
          return setLoading(false)
 
       }catch(e){
-
-         setLoading(false)
-         return console.log(e)
+         setPopupState({isVisible:true,state:"error",title:"Algo salió mal",description:"No se pudo completar la acción..."})
+         return setLoading(false)
+         
       }
       
       
