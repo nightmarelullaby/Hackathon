@@ -35,7 +35,9 @@ export default function ListOffers(props){
 	return(
       <section style={{minWidth:700}}>
       {/*{fetchData.queryParameters?.query !== "" ? <Metric className="mb-4">Resultados para "{fetchData.queryParameters.query}"</Metric>:null}*/}
-      <Title className="mb-2">Resultados para: <mark className="bg-transparent text-gray-400">{fetchData.queryParameters?.query}</mark></Title>
+      <Title>Resultados para: <mark className="bg-transparent text-gray-400">{fetchData.queryParameters?.query}</mark></Title>
+      <Badge className="mb-4" size="sm"color="gray"><Text className="text-neutral-500">{"Mostrando "+ fetchData.currentResults +" de "+fetchData.totalResults+ " resultados"}</Text></Badge>
+      {console.log(fetchData)}
       <div style={{width:"100%",display:"grid",gap:16,gridTemplateColumns:"repeat(auto-fill, minmax(280px, 1fr))"}} {...props} >
       {props.data.map(e =>(
       // <div >
