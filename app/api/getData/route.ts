@@ -12,6 +12,7 @@ export async function GET(request: Request){
 	})
 	const filteredParams = params.entries()
 	const key = process.env.INFOJOBS_API_KEY
+	console.log("inside api")
 	try{
 
 		const requestData = await getData(filteredParams,key)

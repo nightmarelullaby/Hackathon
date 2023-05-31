@@ -1,6 +1,7 @@
 import {useRecoilState} from "recoil"
 import {modalState} from "@/atoms/modalState"
 import {ZoomState} from "@/atoms/ZoomState"
+import {PopupState} from "@/atoms/PopupState"
 import { 
    BarList, 
    BarChart,
@@ -26,6 +27,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import {useEffect,useState} from "react"
 import useSWR from "swr"
 import Image from "next/image"
+import getCoordinatesByCity from "@/services/getCoordinatesByCity"
 
 const logoFallback = "https://components.infojobs.com/statics/images/pic-company-logo.png"
 export const SkeletonStructure = () => {
@@ -39,12 +41,18 @@ export const SkeletonStructure = () => {
 }
 export const DataOfferStructure = ({data}) => {
 	const [btn,setBtn] = useState(false)
+	const [popupState,setPopupState] = useRecoilState(PopupState) 
+
+	const handleSendCV = () => {
+		setBtn(!btn)
+		return setPopupState({isVisible:true,state:"success",title:"Curriculum enviado",description:"Te notificaremos por email la respuesta"})
+	}
 	return(
 		<div className="mb-[48px]">
 			<header className="flex items-center">
 	
 		   	<div className="flex flex gap-x-4">
-		   		<Image alt={data.profile.name}
+		   		<Image alt={data.profile?.name}
 		   		src={data.profile?.logoUrl? data.profile?.logoUrl:logoFallback} 
 		   		width="80" 
 		   		height="80" 
@@ -88,31 +96,40 @@ export const DataOfferStructure = ({data}) => {
 				<Text> {data.minRequirements}</Text>
 			</div>
 
-			<div className=" fixed bottom-0 bg-white w-[30vw] px-4 py-4 flex items-center justify-center">
-				<Button style={{width:"100%"}} onClick={()=>setBtn(!btn)}>{btn ? "CV Enviado ✓":"Enviar mi CV"}</Button>
+			<div className="fixed bottom-0 bg-white w-[30vw] px-4 py-4 flex items-center justify-center">
+				<Button style={{width:"100%",pointerEvents:btn?"none":"all"}} onClick={handleSendCV}>{btn ? "CV Enviado ✓":"Enviar mi CV"}</Button>
 			</div>
 		</div>
 	
 		)
 }
-import getCoordinatesByCity from "@/services/getCoordinatesByCity"
-export default function ModalInfo(props){
 
+export default function ModalInfo(props){
 	const fetcher = (args):any => fetch(args,{mode:"no-cors"}).then(res => res.json())
 	const { data, error, isLoading } = useSWR(`/api/getDataByID?id=${props.id}`, fetcher)
+
+	const [popupState,setPopupState] = useRecoilState(PopupState) 
 	const [zoom,setZoom] = useRecoilState(ZoomState)
 	const [modal,setModal] = useRecoilState(modalState)
 
 	useEffect(()=>{
 		(async ()=> {
+			setPopupState({isVisible:true,state:"loading",title:"Buscando la ubicación",description:"Espera un par de segundos..."})
 			if(isLoading) return;
-			const city = await data.requestData.city
-			const fetchData = await getCoordinatesByCity(city)
-			const latitude = await fetchData[0].latitude 
-			const longitude = await fetchData[0].longitude 
-			return setZoom([latitude,longitude])
+			try{
+				const city = await data.requestData.city
+				const fetchData = await getCoordinatesByCity(city)
+				const latitude = await fetchData[0].latitude 
+				const longitude = await fetchData[0].longitude 
+				setZoom([latitude,longitude])
+				return setPopupState({isVisible:true,state:"success",title:"Todo salió bien",description:"Reposicionando el mapa..."})
+			}catch(e){
+				return setPopupState({isVisible:true,state:"error",title:"Ups. Algo salió mal",description:"Comprueba tu conexión a Internet o intentalo más tarde"})
+			}
+				
 		})()
 	},[isLoading])
+
 	return(
 		<div>
 			{isLoading && <SkeletonStructure /> }
