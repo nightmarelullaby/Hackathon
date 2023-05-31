@@ -41,12 +41,14 @@ export default function ModalLayout({children}){
 				<Popup />
 				<div style={modal|| modal.length<=0?openModal:closedModal} className="bg-white">
 			
-				    <header style={{position:"fixed",}}className="top-0 w-full py-4 bg-white border-b-[1px] border-solid border-slate-100">
-					    <button style={{cursor:"pointer"}} onClick={handleModalAndPopup}>
+				    <header style={{position:"fixed",}} className="top-0 w-full py-4 bg-white border-b-[1px] border-solid border-slate-100">
+					    <button style={{cursor:"pointer"}} className="flex gap-x-[4px] items-center" onClick={handleModalAndPopup}>
 							<svg style={{width:32,height:32}} className="stroke-stone-500 transition hover:stroke-stone-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="0.7" >
 						  		<path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
 							</svg>
+							<Text className="font-extralight stroke-stone-200">Cerrar</Text>
 						</button>
+
 					</header>
 
 					<main style={{marginTop:48}}>
