@@ -113,6 +113,7 @@ export default function ModalInfo(props){
 	const [modal,setModal] = useRecoilState(modalState)
 
 	useEffect(()=>{
+		if(!zoom.state) return;
 		(async ()=> {
 			setPopupState({isVisible:true,state:"loading",title:"Buscando la ubicación",description:"Espera un par de segundos..."})
 			if(isLoading) return;
@@ -121,7 +122,7 @@ export default function ModalInfo(props){
 				const fetchData = await getCoordinatesByCity(city)
 				const latitude = await fetchData[0].latitude 
 				const longitude = await fetchData[0].longitude 
-				setZoom([latitude,longitude])
+				setZoom({...zoom,values:[latitude,longitude]})
 				return setPopupState({isVisible:true,state:"success",title:"Todo salió bien",description:"Reposicionando el mapa..."})
 			}catch(e){
 				return setPopupState({isVisible:true,state:"error",title:"Ups. Algo salió mal",description:"Comprueba tu conexión a Internet o intentalo más tarde"})

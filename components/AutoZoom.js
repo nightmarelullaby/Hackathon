@@ -6,15 +6,16 @@ import {useEffect} from "react"
 export default function AutoZoom(){
 	const [zoomState,setZoomState] = useRecoilState(ZoomState)
 	let map = useMap()
-
-	const setZoom = () =>{
-		return map.setView(zoomState, 13, {animate: true,duration:4.1,easeLinearty:0.15})
+	const coordinates = zoomState.values
+	const setZoom = (values) =>{
+		return map.setView(values, 13, {animate: true,duration:4.1,easeLinearty:0.15})
 	}
 
 	useEffect(()=>{
 		// if(zoomState === null) return map.setView([50,50], 4, {animate: true,duration:4.1,easeLinearty:0.3})
-		if(zoomState === null) return;
-		setZoom()
+		if(zoomState.values === null) return;
+		if(!zoomState.state) return;
+		setZoom(coordinates)
 	},[zoomState])
 	return null
 }

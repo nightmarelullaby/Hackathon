@@ -11,6 +11,8 @@ import {
   Divider,
   Card, 
   Title, 
+  Toggle, 
+  ToggleItem ,
   Flex, 
   Metric, 
   Badge,
@@ -32,6 +34,8 @@ const PlusJakartaSans = Plus_Jakarta_Sans({subsets: ['latin'], weight: ['400','2
 import {geoJSONState} from "@/atoms/geoJSON"
 import {useRecoilState} from "recoil"
 import {offersState} from "@/atoms/offersState"
+import {ZoomState} from "@/atoms/ZoomState"
+import {PopupState} from "@/atoms/PopupState"
 // import MapComponent from "@/components/MapComponent"
 import dynamic from 'next/dynamic';
  
@@ -76,11 +80,20 @@ import {Suspense} from "react"
 
 export default function Home() {
   const [offers,setOffers] = useRecoilState(offersState)
+  const [zoom,setZoom] = useRecoilState(ZoomState)
   const [geoJSON,setgeoJSON] = useRecoilState(geoJSONState)
-
+  const [popupState,setPopupState] = useRecoilState(PopupState) 
   const dataFormatter = (number: number) => {
     return Intl.NumberFormat("us").format(number).toString();
   };
+  const handleZoomState = async (value) => {
+    if(zoom.state === value) return;
+    await setZoom({...zoom, state:value})
+    if(!zoom.state) return setPopupState({isVisible:true,state:"success",title:"Geo-localización automática activada",description:"Ahora cuando mires una oferta el mapa te llevará ahí"})
+    return setPopupState({isVisible:true,state:"success",title:"Geo-localización automática desactivada",description:"El mapa permanecerá igual todo el tiempo"})
+    
+
+  }
   return (
           <main style={{position:"relative"}} className="mt-8 flex flex-col items-center gap-x-4" >
            <section style={{margin:"48px 130px 48px 130px"}} className="flex gap-x-6 items-center">
@@ -91,12 +104,26 @@ export default function Home() {
 
             <section  style={{margin:"48px 0 48px 0",padding:"0 130px"}} className="w-full py-8">
               <FilteringSection />
-              <div className="mt-4">
-                <div className="flex gap-x-[4px]">
-                  <Title>Búsqueda con geolocalización</Title>
-                  <Badge size="xs" color="green">Nuevo</Badge>
+              <Divider className="mt-[4px] mb-[4px] h-px" /> 
+              <div className="mt-4 flex justify-between">
+                <div>
+                  <div className="flex gap-x-[4px] items-start">
+                    <Title>Búsqueda con geolocalización</Title>
+                    <Badge size="xs" color="green">Nuevo</Badge>
+                  </div>
+                    <Text>Busca empleos y localizalos en el mapa.</Text>
                 </div>
-                <Text>Busca empleos y localizalos en el mapa.</Text>
+  
+                  <div className="flex flex-col">
+                    <Text className="mb-2 text-start">Geo-localización automática</Text>
+                    
+                    <Toggle  className="flex gap-x-2" defaultValue={true}onValueChange={(value) => handleZoomState(value)}>
+                      <ToggleItem value={true} text="Activado" />
+                      <ToggleItem value={false} text="Desactivado" />
+                    </Toggle>
+                    </div>
+        
+              
               </div>
               <div className="mt-4 gap-x-4" style={{display:"grid",gridTemplateColumns:"1fr 1fr"}}>
              <MapComponent/>

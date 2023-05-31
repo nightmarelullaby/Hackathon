@@ -89,7 +89,6 @@ export default function ProvincesLayer(){
                       </div>
                       <hr style={{width:1,height:"inherit",margin:"0 16px",backgroundColor:"gray"}}/> 
                       <div className="flex flex-col gap-y-2">
-                      {console.log(fetchData)}
                       <Text className="text-white">{Math.round((popupData.properties?.population*100)/fetchData.totalResults)}% de empleos totales</Text>
                       <ProgressBar percentageValue={Math.round((popupData.properties?.population*100)/fetchData.totalResults)} color="blue"/>
                       </div>

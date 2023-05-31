@@ -9,7 +9,7 @@ export default function CustomMarker(){
 
 	return (<>
 		{zoomState === null ? null
-		:(<Marker position={zoomState} icon={icon}>
+		:(<Marker position={zoomState.values} icon={icon}>
             <Popup>
                 A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>

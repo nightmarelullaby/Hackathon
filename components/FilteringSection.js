@@ -12,6 +12,8 @@ import {
    Bold, 
    Italic, 
    Text, 
+   Toggle, 
+   ToggleItem ,
    TabList, 
    Tab,
    ProgressBar,
@@ -597,6 +599,7 @@ export default function FilteringSection(){
                   Buscar
             </Button>
   </Flex>
+  <div className="flex justify-end">
 <div style={{alignSelf:"end"}}>
   <Text className="mt-3 mb-2 text-start">Categoría</Text>
   <SelectBox 
@@ -614,6 +617,7 @@ export default function FilteringSection(){
    <SelectBoxItem  value="" text="Ninguno"></SelectBoxItem>
   {categories.map(e => <SelectBoxItem key={e.key} value={e.key} text={`${e.value}`}></SelectBoxItem>)}
   </SelectBox>
+  </div>
   </div>
 </div>
 )}
