@@ -104,7 +104,7 @@ export default function Home() {
 
             <section  style={{margin:"48px 0 48px 0",padding:"0 130px"}} className="w-full py-8">
               <FilteringSection />
-              <Divider className="mt-[4px] mb-[4px] h-px" /> 
+              <Divider className="my-[16px] h-px" /> 
               <div className="mt-4 flex justify-between">
                 <div>
                   <div className="flex gap-x-[4px] items-start">
