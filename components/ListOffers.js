@@ -35,8 +35,8 @@ export default function ListOffers(props){
 	return(
       <section style={{minWidth:700}}>
       {/*{fetchData.queryParameters?.query !== "" ? <Metric className="mb-4">Resultados para "{fetchData.queryParameters.query}"</Metric>:null}*/}
+      <Title className="mb-2">Resultados para: <mark className="bg-transparent text-gray-400">{fetchData.queryParameters?.query}</mark></Title>
       <div style={{width:"100%",display:"grid",gap:16,gridTemplateColumns:"repeat(auto-fill, minmax(280px, 1fr))"}} {...props} >
-      
       {props.data.map(e =>(
       // <div >
       <Card key={e.key} className="shadow-[rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px] border-4 border-neutral-50 ">

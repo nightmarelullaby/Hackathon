@@ -101,7 +101,7 @@ export default function Home() {
               <div className="mt-4 gap-x-4" style={{display:"grid",gridTemplateColumns:"1fr 1fr"}}>
              <MapComponent/>
                 <Suspense fallback={<p>Loading...</p>}>
-                  <ListOffers className="grow h-[600px] overflow-scroll p-[4px]" data={offers}/> 
+                  <ListOffers className="grow h-[600px] overflow-scroll p-[2px]" data={offers}/> 
                 </Suspense>
               </div>
             </section>
