@@ -89,7 +89,7 @@ export default function Home() {
   const handleZoomState = async (value) => {
     if(zoom.state === value) return;
     await setZoom({...zoom, state:value})
-    if(!zoom.state) return setPopupState({isVisible:true,state:"success",title:"Geo-localización automática activada",description:"Ahora cuando mires una oferta el mapa te llevará ahí"})
+    if(!zoom.state) return setPopupState({isVisible:true,state:"success",title:"Geo-localización automática activada",description:"Cuando mires una oferta el mapa te llevará ahí"})
     return setPopupState({isVisible:true,state:"success",title:"Geo-localización automática desactivada",description:"El mapa permanecerá igual todo el tiempo"})
     
 
@@ -136,8 +136,8 @@ export default function Home() {
 
 
             <section style={{margin:"48px 130px 0 130px"}} >
-            <Metric className="text-center">Trabaja con empresas líder en el mercado</Metric>
-            <Subtitle className="text-center">Revisa los perfiles de las empresas top de España</Subtitle>
+            <Metric className="text-center">Trabaja con empresas líder del mercado</Metric>
+            <Subtitle className="text-center text-slate-400">Revisa los perfiles de las empresas top de España</Subtitle>
             <div className="flex gap-x-4 mt-6">
               {companies.map(company => 
                 (<Card className=" group/card cursor-pointer hover:shadow overflow-hidden px-6">

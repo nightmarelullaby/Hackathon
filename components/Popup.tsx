@@ -39,7 +39,7 @@ export function LoadingState(){
 				  	className="text-neutral-200">{popupState.title}
 			  	</Bold>
 				<Text 
-					className="text-neutral-300">{popupState.description}
+					className="text-neutral-400">{popupState.description}
 				</Text>
 			</div>
 		</div>)
@@ -63,7 +63,7 @@ export function Succesfull(){
 				  	className="text-neutral-200 ">{popupState.title}
 			  	</Bold>
 				<Text 
-					className="text-neutral-300">{popupState.description}
+					className="text-neutral-400">{popupState.description}
 				</Text>
 			</div>
 		</div>
@@ -89,7 +89,7 @@ export function Error(){
 				  	className="text-neutral-200">{popupState.title}
 			  	</Bold>
 				<Text 
-					className="text-neutral-300">{popupState.description}
+					className="text-neutral-400">{popupState.description}
 				</Text>
 			</div>
 		</div>

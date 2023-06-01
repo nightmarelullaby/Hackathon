@@ -7,6 +7,6 @@ const style = (feature)=>{
         opacity: 1,
         color: 'orangered',
         dashArray: '3',
-        fillOpacity: 0.4
+        fillOpacity: .3
     };}
 export default style

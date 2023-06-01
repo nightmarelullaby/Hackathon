@@ -538,7 +538,7 @@ export default function FilteringSection(){
    const searchDataAndSet = async (category,province,q) => {
       try{
          setLoading(true)
-         setPopupState({isVisible:true,state:"loading",title:"Recalculando el mapa",description:"Aguarda un momento..."})
+         setPopupState({isVisible:true,state:"loading",title:"Recalculando coordenadas...",description:"Aguarda un momento..."})
          const requestData = await fetch(`api/getData?category=${category}&q=${q}&province=${province}&facets=true`,{
             mode:"no-cors"
          })  
