@@ -14,15 +14,18 @@
 }
 .leaflet-popup-content-wrapper{
     border-radius:4px;
-    background-color: #2e2e2ebd;
+    background-color: rgb(23 23 23 / .8);
     backdrop-filter: blur(6px);
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 .leaflet-popup-content{
     width:fit-content;
 }
+.leaflet-container a.leaflet-popup-close-button{
+    color:white;
+}
 .leaflet-popup-tip{
-    background-color: #2e2e2ebd;
+    background-color: rgb(23 23 23 / .8);
 }
 .leaflet-popup-close-button{
     color:lightgray;

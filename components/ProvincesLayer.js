@@ -7,7 +7,7 @@ import getColor from "@/utils/getColor"
 import {geoJSONState} from "@/atoms/geoJSON"
 import style from "@/utils/style"
 // import L from "leaflet"
-import {Metric, Subtitle, Bold, Italic, Text, TabList, Tab,ProgressBar,Divider } from "@tremor/react";
+import {Metric, Subtitle, Bold, Italic, Text, TabList, Tab,ProgressBar,Divider,Badge } from "@tremor/react";
 import "@/styles/ProvincesLayer.css"
 import {useRecoilState} from "recoil"
 import {fetchDataState} from "@/atoms/fetchData"
@@ -21,6 +21,7 @@ export default function ProvincesLayer(){
   const [fetchData,setFetchData] = useRecoilState(fetchDataState)
   const map = useMap()
   // var info = L.control();
+
 
   // info.onAdd = function (mapInput) {
       
@@ -81,15 +82,18 @@ export default function ProvincesLayer(){
   },[geoJSONData])
   return(
                <GeoJSON data={geoJSONData} style={style} ref={layer} eventHandlers={{click:(e)=>setPopupData(e.propagatedFrom.feature)}} >
-                  <Popup >
-                  <div className="flex">
+                  <Popup className="[&>*.leaflet-popup-content-wrapper]:bg-neutral-800">
+                    <div className="flex flex-col">
                       <div>
-                        <Bold class="text-white">{popupData.properties?.name}</Bold>
-                        <Text className="my-2 text-white" style={{margin:"8px 0"}}>{popupData.properties?.population}</Text>
+                        <Text className="text-neutral-400">{popupData.properties?.name}</Text>
+                        <div className="flex gap-x-1 font-thin items-baseline">
+                          <Metric className="my-2 text-white">{popupData.properties?.population}</Metric>
+                        </div>
                       </div>
-                      <hr style={{width:1,height:"inherit",margin:"0 16px",backgroundColor:"gray"}}/> 
+                      <Divider className="my-2 h-px bg-neutral-500"/> 
                       <div className="flex flex-col gap-y-2">
-                      <Text className="text-white">{Math.round((popupData.properties?.population*100)/fetchData.totalResults)}% de empleos totales</Text>
+                      {console.log("total are: ",fetchData.totalResults," current are ",popupData.properties?.population)}
+                      <Text className="text-neutral-300">{Math.round((popupData.properties?.population*100)/fetchData.totalResults)}% del total</Text>
                       <ProgressBar percentageValue={Math.round((popupData.properties?.population*100)/fetchData.totalResults)} color="blue"/>
                       </div>
                     </div>
