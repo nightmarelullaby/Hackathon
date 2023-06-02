@@ -31,7 +31,7 @@ export function LoadingState(){
 
         	<Ring 
 			 size={35}
-			 lineWeight={1}
+			 lineWeight={1.3}
 			 speed={2} 
 			 color="#f1f5f9"/>	
 			 <div className="flex flex-col ">

@@ -94,7 +94,7 @@ export default function ProvincesLayer(){
                       <div className="flex flex-col gap-y-2">
                       {console.log("total are: ",fetchData.totalResults," current are ",popupData.properties?.population)}
                       <Text className="text-neutral-300">{Math.round((popupData.properties?.population*100)/fetchData.totalResults)}% del total</Text>
-                      <ProgressBar percentageValue={Math.round((popupData.properties?.population*100)/fetchData.totalResults)} color="blue"/>
+                      <ProgressBar percentageValue={70} color="blue"/>
                       </div>
                     </div>
                   </Popup>
